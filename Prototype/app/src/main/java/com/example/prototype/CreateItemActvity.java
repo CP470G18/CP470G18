@@ -2,6 +2,7 @@ package com.example.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,9 +24,10 @@ public class CreateItemActvity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CreateItemActvity.this, ListActiviry.class);
-                intent.putExtra("message", text.getText().toString());
-                startActivity(intent);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("Response",text.getText().toString());
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
         });
     }
