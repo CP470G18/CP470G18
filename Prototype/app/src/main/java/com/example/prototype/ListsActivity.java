@@ -51,9 +51,9 @@ public class ListsActivity extends AppCompatActivity {
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(this, ListActivity.class);
-//                intent.putExtra("List", list_names.get(position));
-//                startActivity(intent);
+                Intent intent = new Intent(ListsActivity.this, ListActivity.class);
+                intent.putExtra("List", list_names.get(position));
+                startActivity(intent);
             }
         });
 
@@ -77,7 +77,7 @@ public class ListsActivity extends AppCompatActivity {
                         })
                         .show();
 
-                return false;
+                return true;
             }
         });
 
