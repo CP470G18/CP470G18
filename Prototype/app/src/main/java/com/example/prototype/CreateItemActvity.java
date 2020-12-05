@@ -26,7 +26,7 @@ public class CreateItemActvity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("Response",text.getText().toString());
-                setResult(Activity.RESULT_OK, resultIntent);
+                setResult(-1, resultIntent);
                 finish();
             }
         });

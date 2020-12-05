@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8b7ee1f-6aad-4367-832d-1126bd30e47a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CP470G18.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CP470G18.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Prototype/app/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/app/.idea/gradle.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +39,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1449" y="386" key="FileChooserDialogImpl" timestamp="1603929410958">
+    <state x="1449" y="386" key="FileChooserDialogImpl" timestamp="1607189572539">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1449" y="386" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1603929410958" />
+    <state x="1449" y="386" key="FileChooserDialogImpl/0.0.2560.1400/2560.0.2560.1400@0.0.2560.1400" timestamp="1607189572539" />
   </component>
 </project>
