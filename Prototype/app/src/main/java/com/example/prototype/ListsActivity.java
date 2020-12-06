@@ -98,10 +98,10 @@ public class ListsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_list:
-                //Intent intent = new Intent(this, CreateListactivity.class);
-                //startActivityForResult(intent, 10);
-                list_names.add("placeholder");
-                adapter.notifyDataSetChanged();
+                Intent intent = new Intent(this, CreateItemActvity.class);
+                startActivityForResult(intent, 10);
+                //list_names.add("placeholder");
+                //adapter.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
