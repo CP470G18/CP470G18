@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreateItemActvity extends AppCompatActivity {
+public class CreateGroupActivity extends AppCompatActivity {
 
-    protected static final String ACTIVITY_NAME = "CreateItemActivity";
+    protected static final String ACTIVITY_NAME = "CreateGroupActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_item_actvity);
+        setContentView(R.layout.activity_create_group);
 
         final EditText text = findViewById(R.id.editTextTextPersonName);
         Button b = (Button) findViewById(R.id.button);
@@ -30,7 +30,8 @@ public class CreateItemActvity extends AppCompatActivity {
                 finish();
             }
         });
-    }
+
+    };
 
     protected void onResume(){
         super.onResume();
