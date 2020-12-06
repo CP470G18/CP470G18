@@ -51,9 +51,9 @@ public class ListsActivity extends AppCompatActivity {
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(this, ListActivity.class);
-//                intent.putExtra("List", list_names.get(position));
-//                startActivity(intent);
+                Intent intent = new Intent(ListsActivity.this, ListActivity.class);
+                intent.putExtra("List", list_names.get(position));
+                startActivity(intent);
             }
         });
 
@@ -77,7 +77,7 @@ public class ListsActivity extends AppCompatActivity {
                         })
                         .show();
 
-                return false;
+                return true;
             }
         });
 
@@ -98,10 +98,10 @@ public class ListsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_list:
-                //Intent intent = new Intent(this, CreateListactivity.class);
-                //startActivityForResult(intent, 10);
-                list_names.add("placeholder");
-                adapter.notifyDataSetChanged();
+                Intent intent = new Intent(this, CreateItemActvity.class);
+                startActivityForResult(intent, 10);
+                //list_names.add("placeholder");
+                //adapter.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

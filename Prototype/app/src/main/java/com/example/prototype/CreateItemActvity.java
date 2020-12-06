@@ -9,10 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.List;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class CreateItemActvity extends AppCompatActivity {
 
     protected static final String ACTIVITY_NAME = "CreateItemActivity";
+    private EditText name;
+    private EditText cost;
+    private EditText description;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +37,34 @@ public class CreateItemActvity extends AppCompatActivity {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("Response",text.getText().toString());
                 setResult(-1, resultIntent);
+                Item item = new Item();
+                item.setName(name.getText().toString());
+                item.setCost(Integer.valueOf(cost.getText().toString()));
+                item.setDescription(description.getText().toString());
+
+                new FirebaseDatabaseHelper().addItem(item, new FirebaseDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<Item> items, List<String> keys) {
+                        Toast.makeText(CreateItemActvity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
                 finish();
+
             }
         });
     }

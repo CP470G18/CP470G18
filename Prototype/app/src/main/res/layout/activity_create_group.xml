@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateItemActvity">
+    tools:context=".CreateGroupActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="               New Item"
+        android:text="               New Group"
         android:textColor="#030EDA"
-        android:textSize="32dp" />
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/item_name"
@@ -30,7 +30,6 @@
         android:inputType="text"
         android:text="Item Name" />
 
-
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
@@ -43,22 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textMultiLine"
-        />
-
-    <TextView
-        android:id="@+id/cost"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:textColor="#010002"
-        android:text="Cost:" />
-
-    <EditText
-        android:id="@+id/editTextTextCost"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         />
 
     <Button
@@ -66,8 +50,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit" />
-
-
 
 
 </LinearLayout>
