@@ -9,25 +9,59 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class CreateItemActvity extends AppCompatActivity {
 
     protected static final String ACTIVITY_NAME = "CreateItemActivity";
+    private EditText name;
+    private EditText cost;
+    private EditText description;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item_actvity);
 
-        final EditText text = findViewById(R.id.editTextTextPersonName);
-        Button b = (Button) findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener(){
+        name = findViewById(R.id.editTextTextPersonName);
+        cost = findViewById(R.id.editTextTextCost);
+        description = findViewById(R.id.editTextTextDescription);
+        submit = (Button) findViewById(R.id.button);
+        submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("Response",text.getText().toString());
-                setResult(Activity.RESULT_OK, resultIntent);
+                Item item = new Item();
+                item.setName(name.getText().toString());
+                item.setCost(Integer.valueOf(cost.getText().toString()));
+                item.setDescription(description.getText().toString());
+
+                new FirebaseDatabaseHelper().addItem(item, new FirebaseDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<Item> items, List<String> keys) {
+                        Toast.makeText(CreateItemActvity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+
                 finish();
+
             }
         });
     }
