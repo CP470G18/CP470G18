@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".CreateGroupActivity" />
-        <activity android:name=".ListActivity" />
+        <activity android:name=".ItemDetails"></activity>
+        <activity android:name=".ListActivity"></activity>
         <activity android:name=".ListsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
