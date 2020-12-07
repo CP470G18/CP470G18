@@ -23,6 +23,7 @@ public class CreateItemActvity extends AppCompatActivity {
     private EditText cost;
     private EditText description;
     private Button submit;
+    private Button Cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,16 @@ public class CreateItemActvity extends AppCompatActivity {
                 resultIntent.putExtra("Desc",description.getText().toString());
                 setResult(-1, resultIntent);
                 Item item = new Item();
+
+                name = findViewById(R.id.editTextTextPersonName);
+                cost = findViewById(R.id.editTextTextCost);
+                description = findViewById(R.id.editTextTextDescription);
+
                 item.setName(name.getText().toString());
                 item.setCost(Integer.valueOf(cost.getText().toString()));
                 item.setDescription(description.getText().toString());
 
-                new FirebaseDatabaseHelper().addItem(item, new FirebaseDatabaseHelper.DataStatus() {
+                new FirebaseDatabaseHelper().addItem(item, new FirebaseDatabaseHelper.ItemDataStatus(){
                     @Override
                     public void DataIsLoaded(List<Item> items, List<String> keys) {
                         Toast.makeText(CreateItemActvity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
@@ -70,6 +76,14 @@ public class CreateItemActvity extends AppCompatActivity {
                 });
                 finish();
 
+            }
+        });
+
+        Cancel = (Button) findViewById(R.id.button2);
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
