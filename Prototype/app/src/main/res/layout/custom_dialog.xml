@@ -17,7 +17,7 @@
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:text=" " />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Version:" />
@@ -44,7 +44,7 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Instruction" />
