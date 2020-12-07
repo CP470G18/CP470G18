@@ -3,6 +3,7 @@ package com.example.prototype;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -45,18 +47,54 @@ public class ListActivity extends AppCompatActivity {
                 //startActivityForResult(intent, 2);
             //}
         //});
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
+                startActivityForResult(intent, 2);
+            }
+        });
+        the_list.setClickable(true);
+        the_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle args = new Bundle();
+                args.putString("message",temp_store.get(position));
+                args.putLong("the_id",position);
+//                if(bop==true){
+//                    args.putString("phone","no");
+//                    MessageFragment mf = new MessageFragment();
+//                    mf.setArguments(args);
+//                    mf.setElements(args);
+//                    FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+//
+//                    ft.add(R.id.frameview,mf);
+//                    ft.commit();
+//                }
+//                else{
+                    args.putString("phone","yes");
+                    Intent intent = new Intent(ListActivity.this,ItemDetails.class);
+                    intent.putExtra("bundle",args);
+                    startActivityForResult(intent,2);
+               // }
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==-1)
+        if(resultCode==-1)
         {
-            String message=data.getStringExtra("MESSAGE");
+            String message=data.getStringExtra("Response");
+            Log.i("The test",message);
             temp_store.add(message);
             adapter.notifyDataSetChanged();
 
+        }
+        else{
+            temp_store.remove(resultCode);
+            adapter.notifyDataSetChanged();
         }
     }
 
