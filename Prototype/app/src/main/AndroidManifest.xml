@@ -20,8 +20,7 @@
         <activity android:name=".ItemDetails"></activity>
         <activity android:name=".ListActivity"></activity>
         <activity android:name=".ListsActivity"/>
-        <activity android:name=".CreateGroupActivity" />
-        <activity android:name=".ListActivity" />
+
         <activity android:name=".CreateItemActvity" />
     </application>
 

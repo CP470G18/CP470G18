@@ -39,7 +39,15 @@ public class ListActivity extends AppCompatActivity {
         the_list= (ListView) findViewById(R.id.list);
         //the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
         Toolbar toolbar = findViewById(R.id.toolbar_list);
+        Intent intent=getIntent();
+
+        String listName=intent.getStringExtra("List");
+        Log.i("THis is it", listName);
+        toolbar.setTitle(listName);
         setSupportActionBar(toolbar);
+        the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
+
+
         temp_store=new ArrayList<String>();
         desc_store=new ArrayList<String>();
         price_store=new ArrayList<String>();
