@@ -31,11 +31,16 @@ public class CreateItemActvity extends AppCompatActivity {
 
         final EditText text = findViewById(R.id.editTextTextPersonName);
         Button b = (Button) findViewById(R.id.button);
+        name = (EditText) findViewById(R.id.editTextTextPersonName);
+        description = (EditText) findViewById(R.id.editTextTextDescription);
+        cost= (EditText) findViewById(R.id.editTextTextCost);
         b.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("Response",text.getText().toString());
+                resultIntent.putExtra("Price",cost.getText().toString());
+                resultIntent.putExtra("Desc",description.getText().toString());
                 setResult(-1, resultIntent);
                 Item item = new Item();
                 item.setName(name.getText().toString());
