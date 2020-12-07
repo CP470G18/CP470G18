@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.BuildConfig;
+
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
@@ -39,20 +41,20 @@ public class ListActivity extends AppCompatActivity {
         temp_store=new ArrayList<String>();
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,temp_store);
         the_list.setAdapter(adapter);
-        //the_tool.setOnClickListener(new View.OnClickListener(){
-
-            //@Override
-            //public void onClick(View v) {
-                //Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
-                //startActivityForResult(intent, 2);
-            //}
-        //});
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
-                startActivityForResult(intent, 2);
-            }
-        });
+//        the_tool.setOnClickListener(new View.OnClickListener(){
+//
+//            //@Override
+//            //public void onClick(View v) {
+//                //Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
+//                //startActivityForResult(intent, 2);
+//            //}
+//        //});
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
+//                startActivityForResult(intent, 2);
+//            }
+//        });
         the_list.setClickable(true);
         the_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
