@@ -33,33 +33,37 @@ public class CreateGroupActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Group group = new Group();
-                group.setName(name.getText().toString());
-                group.setDescription(description.getText().toString());
-
-                new FirebaseDatabaseHelper().addGroup(group, new FirebaseDatabaseHelper.GroupDataStatus() {
-                            @Override
-                            public void DataIsLoaded(List<Group> Groups, List<String> keys) {
-                                Toast.makeText(CreateGroupActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void DataIsInserted() {
-
-                            }
-
-                            @Override
-                            public void DataIsUpdated() {
-
-                            }
-
-                            @Override
-                            public void DataIsDeleted() {
-
-                            }
-                });
-
-                        finish();
+                Intent intent = new Intent();
+                intent.putExtra("Title", name.getText().toString());
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+//                Group group = new Group();
+//                group.setName(name.getText().toString());
+//                group.setDescription(description.getText().toString());
+//
+//                new FirebaseDatabaseHelper().addGroup(group, new FirebaseDatabaseHelper.GroupDataStatus() {
+//                            @Override
+//                            public void DataIsLoaded(List<Group> Groups, List<String> keys) {
+//                                Toast.makeText(CreateGroupActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void DataIsInserted() {
+//
+//                            }
+//
+//                            @Override
+//                            public void DataIsUpdated() {
+//
+//                            }
+//
+//                            @Override
+//                            public void DataIsDeleted() {
+//
+//                            }
+//                });
+//
+//                        finish();
 
             }
         });
