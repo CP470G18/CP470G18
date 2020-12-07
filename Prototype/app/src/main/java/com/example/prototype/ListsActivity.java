@@ -115,6 +115,7 @@ public class ListsActivity extends AppCompatActivity {
         if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
             String title = data.getStringExtra("Title");
             list_names.add(title);
+            adapter.notifyDataSetChanged();
         }
     }
     
