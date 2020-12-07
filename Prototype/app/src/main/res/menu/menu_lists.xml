@@ -4,7 +4,14 @@
 
     <item
         android:id="@+id/create_list"
+        android:orderInCategory="101"
         android:icon="@drawable/ic_baseline_add_24"
         android:title="Create List"
         app:showAsAction="always" />
+
+    <item
+        android:id = "@+id/About"
+        android:orderInCategory="101"
+        android:title = "Help"
+        app:showAsAction="never"/>
 </menu>
