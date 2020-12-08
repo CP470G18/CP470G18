@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -25,8 +26,8 @@ public class MenuActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this,ListActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(MenuActivity.this,ListsActivity.class);
+                startActivityForResult(intent,10);
             }
         });
 
@@ -39,6 +40,15 @@ public class MenuActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
                 builder.setView(view);
                 builder.setTitle("Help");
+
+                TextView version = view.findViewById(R.id.version) ;
+                String version_name = BuildConfig.VERSION_NAME;
+                int version_code = BuildConfig.VERSION_CODE;
+                version.setText("versionName:"+version_name+" versionCode:"+version_code);
+
+                TextView instruction = view.findViewById(R.id.instruction) ;
+                instruction.setText("Instrction:\nClick MANAGE THE LIST button to open" +
+                        " activity for create new group list");
 
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
