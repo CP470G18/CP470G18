@@ -56,6 +56,8 @@ public class ListsActivity extends AppCompatActivity {
         price_lists.setAdapter(adp);
 
 
+        dbHelper = new FirebaseDatabaseHelper();
+
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,8 +77,33 @@ public class ListsActivity extends AppCompatActivity {
                         .setTitle(R.string.delete_title)
                         .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                list_names.remove(position);
-                                adapter.notifyDataSetChanged();
+                                dbHelper.deleteList(list_keys.get(position), new FirebaseDatabaseHelper.listDataStatus() {
+                                    @Override
+                                    public void DataIsLoaded(ArrayList<List> lists, ArrayList<String> keys) {
+                                        list_names.clear();
+                                        list_keys.clear();
+                                        for (int i = 0; i<lists.size(); i++) {
+                                            list_names.add(lists.get(i).getName());
+                                            list_keys.add(keys.get(i));
+                                        }
+                                        adapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void DataIsInserted() {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsUpdated() {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsDeleted() {
+
+                                    }
+                                });
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -96,12 +123,11 @@ public class ListsActivity extends AppCompatActivity {
 
         dbHelper = new FirebaseDatabaseHelper();
 
-        //populate();
+        populate();
     }
 
     @Override
     public void onResume() {
-
         super.onResume();
         populate();
     }
