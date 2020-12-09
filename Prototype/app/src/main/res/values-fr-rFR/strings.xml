@@ -31,4 +31,10 @@
     <string name="item_name">Nom:</string>
     <string name="Cost">Coût:</string>
 
+
+    //Update
+    <string name="Update">Mise à jour</string>
+    <string name="Delete">Supprimer</string>
+    <string name="Edit">Éditer</string>
+
 </resources>

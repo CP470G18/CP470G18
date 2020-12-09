@@ -14,14 +14,7 @@
         android:text="TextView"
         android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/messageDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:text="Button"
-        tools:text="@string/delText" />
+
 
     <TextView
         android:id="@+id/textView2"

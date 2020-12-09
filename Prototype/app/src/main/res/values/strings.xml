@@ -9,7 +9,7 @@
     <string name="descText">Description:</string>
     <string name="delText">Delete</string>
 
-//String for Menu and the Dialog
+    //String for Menu and the Dialog
     <string name="List_app">List App</string>
     <string name="Get_Help">Get Help</string>
     <string name="manage_list">Manage The List</string>
@@ -17,7 +17,7 @@
     <string name="Version">Version:</string>
     <string name="Instruction">Instruction:</string>
 
-//String for Create Activity
+    //String for Create Activity
     <string name="new_group">New Group</string>
     <string name="group_name">Name:</string>
     <string name="Description">Description:</string>
@@ -28,6 +28,10 @@
     <string name="item_name">Name:</string>
     <string name="Cost">Cost:</string>
 
+    //Update
+    <string name="Update">Update</string>
+    <string name="Delete">Delete</string>
+    <string name="Edit">EDIT</string>
 
 
 </resources>

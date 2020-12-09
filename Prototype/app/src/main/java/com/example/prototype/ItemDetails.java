@@ -12,9 +12,13 @@ public class ItemDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_item_details);
         setContentView(R.layout.activity_item_details);
+       // FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+         ListFragment mf = new ListFragment();
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ListFragment mf = new ListFragment();
+
 
 
 
@@ -26,10 +30,14 @@ public class ItemDetails extends AppCompatActivity {
         Log.i("this is what",bd.getString("message"));
 
 
-       mf.setElements(bd);
+        mf.setElements(bd);
         mf.setArguments(bd);
-        ft.add(R.id.the_frame,mf);
+        //ft.add(R.id.the_frame,mf);
+
+        ft.replace(R.id.listfragmentlayout, mf);
 
         ft.commit();
+
+
     }
 }

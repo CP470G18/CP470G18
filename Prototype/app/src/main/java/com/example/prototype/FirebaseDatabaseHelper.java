@@ -86,11 +86,26 @@ public class FirebaseDatabaseHelper {
             }
         });
     }
-    public void deleteItem(String itemName, String listName){
-        ReferenceItem = Database.getReference("lists").child(listName).child("items");
-        ReferenceItem.child(itemName).removeValue();
 
+    public void updateItem(String key, Item item ,final ItemDataStatus dataStatus){
+        ReferenceItem.child(key).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsUpdated();
+            }
+        });
     }
+
+    public void deleteItem(String key, final ItemDataStatus dataStatus){
+        ReferenceItem.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                dataStatus.DataIsDeleted();
+            }
+        });
+    }
+
+
     public void addItem(Item item, String listKey, final ItemDataStatus dataStatus){
         ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         String key = ReferenceItem.push().getKey();

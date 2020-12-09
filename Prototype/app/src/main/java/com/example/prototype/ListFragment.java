@@ -1,5 +1,6 @@
 package com.example.prototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_fragment, parent, false);
-        delete_button = (Button) v.findViewById(R.id.messageDelete);
+        //delete_button = (Button) v.findViewById(R.id.messageDelete);
         the_message = (TextView) v.findViewById(R.id.messageFrag);
         the_desc= (TextView) v.findViewById(R.id.descFrag);
         the_price= (TextView) v.findViewById(R.id.priceFrag);
@@ -56,19 +57,21 @@ public class ListFragment extends Fragment {
         dbHelper = new FirebaseDatabaseHelper();
         dbHelper.setList(listName);
 
-        delete_button.setOnClickListener(new View.OnClickListener(){
+        //delete_button.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
+           // @Override
+            //public void onClick(View v) {
                 //dbHelper.deleteItem();
-                getActivity().setResult(((int) textId)+1);
+                //getActivity().setResult(((int) textId)+1);
                 // if(the_type=="yes"){
-                getActivity().finish();
+                //getActivity().finish();
                 //}
 
 
-            }
-        });
+
+
+            //}
+       // });
         return v;
     }
 

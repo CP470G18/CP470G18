@@ -5,24 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateItemActivity">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="4dp"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+    tools:context=".UpdateDeleteItemActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_item"
+        android:text="@string/Edit"
         android:textColor="#030EDA"
         android:textSize="32dp" />
 
@@ -75,13 +64,18 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Submit" />
+        android:text="@string/Update" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Delete" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Cancel" />
-
 
 </LinearLayout>
