@@ -130,7 +130,7 @@ public class ListActivity extends AppCompatActivity {
             case R.id.create_list:
                 Log.d("Toolbar","creat_list selected");
                 Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
-                startActivityForResult(intent, 2);
+                startActivityForResult(intent, 10);
                 //you can do your create list activity here
                 return true;
             case R.id.About:

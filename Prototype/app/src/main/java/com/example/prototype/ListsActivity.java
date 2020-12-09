@@ -24,6 +24,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.BuildConfig;
+
 import java.util.ArrayList;
 
 public class ListsActivity extends AppCompatActivity {
@@ -98,10 +100,31 @@ public class ListsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_list:
-                Intent intent = new Intent(this, CreateGroupActivity.class);
+                Intent intent = new Intent(ListsActivity.this, CreateGroupActivity.class);
                 startActivityForResult(intent, 10);
                 //list_names.add("placeholder");
                 //adapter.notifyDataSetChanged();
+                return true;
+            case R.id.About:
+                LayoutInflater inflater = ListsActivity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.custom_dialog,null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListsActivity.this);
+                builder.setView(view);
+                builder.setTitle("Help");
+                TextView instruction = view.findViewById(R.id.instruction) ;
+                instruction.setText("Instrction:\nClick + button to create new group list");
+                TextView version = view.findViewById(R.id.version) ;
+                String version_name = com.google.firebase.BuildConfig.VERSION_NAME;
+                int version_code = BuildConfig.VERSION_CODE;
+                version.setText("versionName:"+version_name+" versionCode:"+version_code);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

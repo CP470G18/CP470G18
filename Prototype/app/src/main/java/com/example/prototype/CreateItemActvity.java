@@ -1,18 +1,29 @@
 package com.example.prototype;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 import android.widget.Toast;
+
+import com.google.firebase.BuildConfig;
 
 import java.util.List;
 
@@ -29,6 +40,10 @@ public class CreateItemActvity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_item_actvity);
+
+        Toolbar toolbar_item = (Toolbar) findViewById(R.id.toolbar_item);
+        toolbar_item.setTitle("Create_Item");
+        setSupportActionBar(toolbar_item);
 
         final EditText text = findViewById(R.id.editTextTextPersonName);
         Button b = (Button) findViewById(R.id.button);
@@ -87,6 +102,46 @@ public class CreateItemActvity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_create, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.About:
+                LayoutInflater inflater = CreateItemActvity.this.getLayoutInflater();
+                View view = inflater.inflate(R.layout.custom_dialog,null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateItemActvity.this);
+                builder.setView(view);
+                builder.setTitle("Help");
+                TextView instruction = view.findViewById(R.id.instruction) ;
+                instruction.setText("Instrction:\nInput the name,description and price for your group list \n" +
+                        "Click SUBMIT to save the information\nClick CANCEL to go back ");
+                TextView version = view.findViewById(R.id.version) ;
+                String version_name = com.google.firebase.BuildConfig.VERSION_NAME;
+                int version_code = BuildConfig.VERSION_CODE;
+                version.setText("versionName:"+version_name+" versionCode:"+version_code);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
     protected void onResume(){
         super.onResume();
