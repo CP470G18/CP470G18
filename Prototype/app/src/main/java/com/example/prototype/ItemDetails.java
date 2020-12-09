@@ -6,8 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class ItemDetails extends AppCompatActivity {
+
+    private Button edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,16 @@ public class ItemDetails extends AppCompatActivity {
 
         ft.commit();
 
+
+        edit = (Button) findViewById(R.id.button3);
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ItemDetails.this,UpdateDeleteItemActivity.class);
+
+                startActivityForResult(intent, 2);
+            }
+        });
 
     }
 }
