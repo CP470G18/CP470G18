@@ -122,6 +122,7 @@ public class ListsActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
 
+<<<<<<< HEAD
             @Override
             public void DataIsInserted() {
 
@@ -137,6 +138,13 @@ public class ListsActivity extends AppCompatActivity {
 
             }
         });
+=======
+        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
+            String title = data.getStringExtra("Title");
+            list_names.add(title);
+            adapter.notifyDataSetChanged();
+        }
+>>>>>>> main
     }
     
     private class ChatAdapter extends ArrayAdapter<String>{

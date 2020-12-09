@@ -14,7 +14,15 @@ import androidx.fragment.app.Fragment;
 public class ListFragment extends Fragment {
     Button delete_button;
     TextView the_message;
+    TextView the_price;
+    TextView the_desc;
     String messageText;
+    String priceText;
+    String descText;
+
+    TextView nt;
+    TextView pt;
+    TextView dt;
     long textId;
     Bundle the_args;
     @Override
@@ -28,8 +36,20 @@ public class ListFragment extends Fragment {
         View v=inflater.inflate(R.layout.list_fragment, parent, false);
         delete_button = (Button) v.findViewById(R.id.messageDelete);
         the_message = (TextView) v.findViewById(R.id.messageFrag);
+        the_desc= (TextView) v.findViewById(R.id.descFrag);
+        the_price= (TextView) v.findViewById(R.id.priceFrag);
+        nt= (TextView) v.findViewById(R.id.textView2);
+        pt= (TextView) v.findViewById(R.id.textView3);
+        dt= (TextView) v.findViewById(R.id.textView5);
+        delete_button.setText(R.string.delText);
+
+        nt.setText(R.string.nameText);
+        pt.setText(R.string.priceText);
+        dt.setText(R.string.descText);
 //        idText = (TextView) v.findViewById(R.id.idText);
         the_message.setText(messageText);
+        the_desc.setText(descText);
+        the_price.setText(priceText);
 //        idText.setText((String.valueOf(the_id)));
 //        delete_button.setText(R.string.deleteButton);
         delete_button.setOnClickListener(new View.OnClickListener(){
@@ -51,6 +71,8 @@ public class ListFragment extends Fragment {
     public void setElements(Bundle args){
         messageText=args.getString("message");
         textId=args.getLong("the_id");
+        priceText=args.getString("Price");
+        descText=args.getString("Desc");
 
         the_args=args;
     }

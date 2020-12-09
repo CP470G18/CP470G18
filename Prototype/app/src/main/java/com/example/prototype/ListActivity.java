@@ -26,6 +26,8 @@ import java.util.ArrayList;
 public class ListActivity extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "ListActivity";
     ArrayList<String> temp_store;
+    ArrayList<String> price_store;
+    ArrayList<String> desc_store;
     ListView the_list;
     ArrayAdapter<String> adapter;
     androidx.appcompat.widget.Toolbar the_tool;
@@ -37,8 +39,18 @@ public class ListActivity extends AppCompatActivity {
         the_list= (ListView) findViewById(R.id.list);
         //the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
         Toolbar toolbar = findViewById(R.id.toolbar_list);
+        Intent intent=getIntent();
+
+        String listName=intent.getStringExtra("List");
+        Log.i("THis is it", listName);
+        toolbar.setTitle(listName);
         setSupportActionBar(toolbar);
+        the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
+
+
         temp_store=new ArrayList<String>();
+        desc_store=new ArrayList<String>();
+        price_store=new ArrayList<String>();
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,temp_store);
         the_list.setAdapter(adapter);
 //        the_tool.setOnClickListener(new View.OnClickListener(){
@@ -62,6 +74,8 @@ public class ListActivity extends AppCompatActivity {
                 Bundle args = new Bundle();
                 args.putString("message",temp_store.get(position));
                 args.putLong("the_id",position);
+                args.putString("Price",price_store.get(position));
+                args.putString("Desc",desc_store.get(position));
 //                if(bop==true){
 //                    args.putString("phone","no");
 //                    MessageFragment mf = new MessageFragment();
@@ -89,6 +103,12 @@ public class ListActivity extends AppCompatActivity {
         if(resultCode==-1)
         {
             String message=data.getStringExtra("Response");
+            String price=data.getStringExtra("Price");
+            String desc =data.getStringExtra("Desc");
+            Log.i("HELPME",price);
+
+            price_store.add(price);
+            desc_store.add(desc);
             Log.i("The test",message);
             temp_store.add(message);
             adapter.notifyDataSetChanged();
