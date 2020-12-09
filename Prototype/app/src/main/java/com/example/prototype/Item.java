@@ -4,15 +4,17 @@ public class Item {
     private String name;
     private Integer cost;
     private String description;
+    private  String key;
 
 
     public Item() {
     }
 
-    public Item(String name, Integer cost, String description) {
+    public Item(String name, Integer cost, String description, String key) {
         this.name = name;
         this.cost = cost;
         this.description = description;
+        this.key=key;
     }
 
     public int getCost() {
@@ -21,6 +23,14 @@ public class Item {
 
     public void setCost(Integer cost) {
         this.cost = cost;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {

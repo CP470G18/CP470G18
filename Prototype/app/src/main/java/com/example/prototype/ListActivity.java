@@ -28,6 +28,7 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> temp_store;
     ArrayList<String> price_store;
     ArrayList<String> desc_store;
+    ArrayList<String> key_store;
     int costTotal;
     ListView the_list;
     TextView the_price_total;
@@ -56,6 +57,7 @@ public class ListActivity extends AppCompatActivity {
         temp_store=new ArrayList<String>();
         desc_store=new ArrayList<String>();
         price_store=new ArrayList<String>();
+        key_store=new ArrayList<String>();
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,temp_store);
         the_list.setAdapter(adapter);
         dbHelper = new FirebaseDatabaseHelper();
@@ -85,22 +87,15 @@ public class ListActivity extends AppCompatActivity {
                 args.putString("Price",price_store.get(position));
                 args.putString("Desc",desc_store.get(position));
                 args.putString("ListName",listName);
-//                if(bop==true){
-//                    args.putString("phone","no");
-//                    MessageFragment mf = new MessageFragment();
-//                    mf.setArguments(args);
-//                    mf.setElements(args);
-//                    FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-//
-//                    ft.add(R.id.frameview,mf);
-//                    ft.commit();
-//                }
-//                else{
-                    args.putString("phone","yes");
-                    Intent intent = new Intent(ListActivity.this,ItemDetails.class);
-                    intent.putExtra("bundle",args);
-                    startActivityForResult(intent,2);
-               // }
+
+                //FOR OWEN
+                args.putString("Key",key_store.get(position));
+
+                args.putString("phone","yes");
+                Intent intent = new Intent(ListActivity.this,ItemDetails.class);
+                intent.putExtra("bundle",args);
+                startActivityForResult(intent,2);
+
             }
         });
     }
@@ -220,6 +215,7 @@ public class ListActivity extends AppCompatActivity {
                         costTotal+=items.get(i).getCost();
                         the_price_total.setText(String.valueOf(costTotal));
                         desc_store.add(items.get(i).getDescription());
+                        key_store.add(items.get(i).getKey());
 //                        list_keys.add(keys.get(i));
                         adapter.notifyDataSetChanged();
 

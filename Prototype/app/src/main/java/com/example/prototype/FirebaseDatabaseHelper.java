@@ -109,6 +109,7 @@ public class FirebaseDatabaseHelper {
     public void addItem(Item item, String listKey, final ItemDataStatus dataStatus){
         ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         String key = ReferenceItem.push().getKey();
+        item.setKey(key);
         ReferenceItem.child(key).setValue(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
