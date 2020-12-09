@@ -57,7 +57,7 @@ public class ListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                getActivity().setResult((int) textId);
+                getActivity().setResult(((int) textId)+1);
                 // if(the_type=="yes"){
                 getActivity().finish();
                 //}

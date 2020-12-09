@@ -100,7 +100,10 @@ public class ListActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(resultCode==-1)
+        if(resultCode==0){
+
+        }
+        else if(resultCode==-1)
         {
             String message=data.getStringExtra("Response");
             String price=data.getStringExtra("Price");
@@ -114,8 +117,9 @@ public class ListActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
-        else{
-            temp_store.remove(resultCode);
+        else if(resultCode!=0){
+            Log.i("ERROR", String.valueOf(resultCode));
+            temp_store.remove(resultCode-1);
             adapter.notifyDataSetChanged();
         }
     }
