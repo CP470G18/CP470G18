@@ -57,7 +57,7 @@ public class ListsActivity extends AppCompatActivity {
 
 
         dbHelper = new FirebaseDatabaseHelper();
-
+        //populate();
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -123,7 +123,7 @@ public class ListsActivity extends AppCompatActivity {
 
         dbHelper = new FirebaseDatabaseHelper();
 
-        populate();
+        //populate();
     }
 
     @Override
@@ -200,7 +200,7 @@ public class ListsActivity extends AppCompatActivity {
                         public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
 
                             Log.i("Warning","Populating table");
-                            list_keys.clear();
+
                             int costPer=0;
                             for (int t = 0; t<items.size(); t++) {
                                 Log.i("Testing",items.get(t).getName());
@@ -290,40 +290,5 @@ public class ListsActivity extends AppCompatActivity {
             return view;
         }
     }
-    private class PriceAdapter extends ArrayAdapter<String>{
 
-        public PriceAdapter(Context ctx) {
-            super(ctx, 0);
-        }
-
-        /**
-         * Gets the size of list_names.
-         *
-         * @return Size of list_names.
-         */
-        public int getCount() {
-            return list_prices.size();
-        }
-
-        /**
-         * Gets an item from the array by index.
-         *
-         * @param position Index of array to get item from.
-         * @return Item.
-         */
-        public String getItem(int position) {
-            return list_prices.get(position);
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = ListsActivity.this.getLayoutInflater();
-
-            View view = inflater.inflate(R.layout.layout_lists, null);
-
-//            TextView title = (TextView) view.findViewById(R.id.list_title);
-//            title.setText(getItem(position));
-
-            return view;
-        }
-    }
 }
