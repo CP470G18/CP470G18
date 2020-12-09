@@ -26,9 +26,18 @@
 
     <ListView
         android:id="@+id/lists"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_lists">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/listPrices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_lists"
+        android:layout_toRightOf="@id/lists">
 
     </ListView>
 
