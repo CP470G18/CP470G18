@@ -87,7 +87,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void updateItem(String key, Item item ,final ItemDataStatus dataStatus){
+    public void updateItem(String listKey, String key, Item item ,final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         ReferenceItem.child(key).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -96,7 +97,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void deleteItem(String key, final ItemDataStatus dataStatus){
+    public void deleteItem(String listKey, String key, final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         ReferenceItem.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
