@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prototype</string>
+    <string name="delete_title">Warning</string>
+    <string name="delete_message">Are you sure you want to delete this list?</string>
+    <string name="ok">oooooo</string>
+    <string name="cancel">ccccc</string>
+    <string name="nameText">Name:</string>
+    <string name="priceText">Price:</string>
+    <string name="descText">Description:</string>
+    <string name="delText">Delete</string>
+
+
+    //String for Menu and the Dialog
+    <string name="List_app">App de liste</string>
+    <string name="Get_Help">Obtenir de l\'aide</string>
+    <string name="manage_list">Gérer la liste</string>
+    <string name="Author_Name">Le nom de l\'auteur</string>
+    <string name="Version">Version:</string>
+    <string name="Instruction">Instruction:</string>
+
+
+    //String for Create Activity
+    <string name="new_group">Nouveau Groupe</string>
+    <string name="group_name">Nom:</string>
+    <string name="Description">La description:</string>
+    <string name="Submit">Soumettre</string>
+    <string name="Cancel">Annuler</string>
+
+    <string name="new_item">Nouvel article</string>
+    <string name="item_name">Nom:</string>
+    <string name="Cost">Coût:</string>
+
+</resources>

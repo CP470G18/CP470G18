@@ -1,15 +1,19 @@
 package com.example.prototype;
 
-public class Group {
+import java.util.ArrayList;
+
+public class List {
     private String name;
     private String description;
+    private ArrayList<Item> items;
 
-    public Group() {
+    public List() {
     }
 
-    public Group(String name, String description) {
+    public List(String name, String description, ArrayList<Item> items) {
         this.name = name;
         this.description = description;
+        this.items = items;
     }
 
     public String getName() {
