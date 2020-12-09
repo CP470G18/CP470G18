@@ -9,7 +9,7 @@
     <string name="priceText">Price:</string>
     <string name="descText">Description:</string>
     <string name="delText">Delete</string>
-
+    <string name="totalCost">Total Cost($): </string>
 
     //String for Menu and the Dialog
     <string name="List_app">App de liste</string>
