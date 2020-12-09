@@ -43,7 +43,7 @@ public class ListFragment extends Fragment {
         nt= (TextView) v.findViewById(R.id.textView2);
         pt= (TextView) v.findViewById(R.id.textView3);
         dt= (TextView) v.findViewById(R.id.textView5);
-        delete_button.setText(R.string.delText);
+        //delete_button.setText(R.string.delText);
 
         nt.setText(R.string.nameText);
         pt.setText(R.string.priceText);
