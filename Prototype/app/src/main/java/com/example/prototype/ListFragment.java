@@ -19,7 +19,8 @@ public class ListFragment extends Fragment {
     String messageText;
     String priceText;
     String descText;
-
+    String listName;
+    private FirebaseDatabaseHelper dbHelper;
     TextView nt;
     TextView pt;
     TextView dt;
@@ -52,12 +53,15 @@ public class ListFragment extends Fragment {
         the_price.setText(priceText);
 //        idText.setText((String.valueOf(the_id)));
 //        delete_button.setText(R.string.deleteButton);
+        dbHelper = new FirebaseDatabaseHelper();
+        dbHelper.setList(listName);
+
         delete_button.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-
-                getActivity().setResult((int) textId);
+                //dbHelper.deleteItem();
+                getActivity().setResult(((int) textId)+1);
                 // if(the_type=="yes"){
                 getActivity().finish();
                 //}
@@ -73,7 +77,7 @@ public class ListFragment extends Fragment {
         textId=args.getLong("the_id");
         priceText=args.getString("Price");
         descText=args.getString("Desc");
-
+        listName=args.getString("ListName");
         the_args=args;
     }
 

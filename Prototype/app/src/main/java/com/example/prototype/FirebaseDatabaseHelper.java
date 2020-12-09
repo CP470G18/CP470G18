@@ -1,6 +1,7 @@
 package com.example.prototype;
 
 import android.content.ClipData;
+import android.provider.ContactsContract;
 
 import androidx.annotation.NonNull;
 
@@ -17,12 +18,17 @@ public class FirebaseDatabaseHelper {
     private FirebaseDatabase Database;
     private DatabaseReference ReferenceItem;
     private DatabaseReference ReferenceList;
+    private String listName;
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<List> lists = new ArrayList<>();
 
     public FirebaseDatabaseHelper() {
         Database = FirebaseDatabase.getInstance();
         ReferenceList = Database.getReference("lists");//list of item list
+
+    }
+    public void setList(String listName){
+        ReferenceItem= Database.getReference("lists").child(listName).child("items");
     }
 
 
@@ -80,7 +86,11 @@ public class FirebaseDatabaseHelper {
             }
         });
     }
+    public void deleteItem(String itemName, String listName){
+        ReferenceItem = Database.getReference("lists").child(listName).child("items");
+        ReferenceItem.child(itemName).removeValue();
 
+    }
     public void addItem(Item item, String listKey, final ItemDataStatus dataStatus){
         ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         String key = ReferenceItem.push().getKey();

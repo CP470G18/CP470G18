@@ -29,9 +29,11 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> price_store;
     ArrayList<String> desc_store;
     ListView the_list;
+    private ArrayList<String> list_keys;
     ArrayAdapter<String> adapter;
     androidx.appcompat.widget.Toolbar the_tool;
-
+    String listName;
+    private FirebaseDatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +43,21 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_list);
         Intent intent=getIntent();
 
-        String listName=intent.getStringExtra("List");
+        listName=intent.getStringExtra("ListKey");
         //Log.i("THis is it", listName);
         toolbar.setTitle(listName);
         setSupportActionBar(toolbar);
         the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
-
+        list_keys = new ArrayList<>();
 
         temp_store=new ArrayList<String>();
         desc_store=new ArrayList<String>();
         price_store=new ArrayList<String>();
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,temp_store);
         the_list.setAdapter(adapter);
+        dbHelper = new FirebaseDatabaseHelper();
+        dbHelper.setList(listName);
+        populate();
 //        the_tool.setOnClickListener(new View.OnClickListener(){
 //
 //            //@Override
@@ -76,6 +81,7 @@ public class ListActivity extends AppCompatActivity {
                 args.putLong("the_id",position);
                 args.putString("Price",price_store.get(position));
                 args.putString("Desc",desc_store.get(position));
+                args.putString("ListName",listName);
 //                if(bop==true){
 //                    args.putString("phone","no");
 //                    MessageFragment mf = new MessageFragment();
@@ -100,7 +106,10 @@ public class ListActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(resultCode==-1)
+        if(resultCode==0){
+
+        }
+        else if(resultCode==-1)
         {
             String message=data.getStringExtra("Response");
             String price=data.getStringExtra("Price");
@@ -114,8 +123,9 @@ public class ListActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
-        else{
-            temp_store.remove(resultCode);
+        else if(resultCode!=0){
+            Log.i("ERROR", String.valueOf(resultCode));
+            temp_store.remove(resultCode-1);
             adapter.notifyDataSetChanged();
         }
     }
@@ -166,6 +176,7 @@ public class ListActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         Log.i(ACTIVITY_NAME,"In onResume()");
+        populate();
     };
 
     protected void onStart(){
@@ -187,6 +198,44 @@ public class ListActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(ACTIVITY_NAME,"In onDestroy()");
     };
+    private void populate() {
 
+        dbHelper.readItems(new FirebaseDatabaseHelper.ItemDataStatus() {
+
+
+            @Override
+            public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
+                temp_store.clear();
+                Log.i("Warning","Populating table");
+                list_keys.clear();
+                for (int i = 0; i<items.size(); i++) {
+                    Log.i("Testing",items.get(i).getName());
+
+                        temp_store.add(items.get(i).getName());
+                        price_store.add(String.valueOf(items.get(i).getCost()));
+                        desc_store.add(items.get(i).getDescription());
+//                        list_keys.add(keys.get(i));
+                        adapter.notifyDataSetChanged();
+
+
+                }
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
+    }
 
 }

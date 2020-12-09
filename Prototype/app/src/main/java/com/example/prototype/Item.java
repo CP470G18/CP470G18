@@ -15,7 +15,7 @@ public class Item {
         this.description = description;
     }
 
-    public Integer getCost() {
+    public int getCost() {
         return cost;
     }
 
