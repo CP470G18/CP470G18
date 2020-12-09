@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Author's Name"
+        android:text="@string/Author_Name"
         android:textColor="#FF9800"
         android:textSize="20dp" />
 
@@ -35,7 +35,7 @@
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Version:" />
+        android:text="@string/Version" />
 
     <TextView
         android:id="@+id/textView6"
@@ -47,7 +47,7 @@
         android:id="@+id/instruction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Instruction" />
+        android:text="@string/Instruction" />
 
 
 </LinearLayout>
