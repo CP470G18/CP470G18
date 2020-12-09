@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ListsActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"/>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_lists"
         android:layout_width="match_parent"
@@ -20,6 +28,8 @@
         android:id="@+id/lists"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_lists"/>
+        android:layout_below="@+id/toolbar_lists">
+
+    </ListView>
 
 </RelativeLayout>

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8b7ee1f-6aad-4367-832d-1126bd30e47a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Prototype/app/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Prototype/app/.idea/gradle.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c8b7ee1f-6aad-4367-832d-1126bd30e47a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +21,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Prototype" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
