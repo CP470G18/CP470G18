@@ -25,6 +25,7 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
     private String listkey;
     private String sdescreption;
     private String sprice;
+    private String  messageText;
 
 
 
@@ -39,6 +40,7 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
         sdescreption = getIntent().getStringExtra("description");
         sprice = getIntent().getStringExtra("price");
         key = getIntent().getStringExtra("key");
+        messageText = getIntent().getStringExtra("name");
 
         name = (EditText) findViewById(R.id.editTextTextPersonName);
         description = (EditText) findViewById(R.id.editTextTextDescription);
@@ -47,7 +49,7 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
         Delete = (Button) findViewById(R.id.button1);
         Cancel = (Button) findViewById(R.id.button2);
 
-        //name.setText(key);
+        name.setText(messageText);
         description.setText(sdescreption);
         cost.setText(sprice);
 

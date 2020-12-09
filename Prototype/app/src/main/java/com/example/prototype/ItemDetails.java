@@ -63,6 +63,7 @@ public class ItemDetails extends AppCompatActivity {
                 intent.putExtra("description",descText);
                 intent.putExtra("price",priceText);
                 intent.putExtra("key",key);
+                intent.putExtra("name", messageText);
 
                 startActivityForResult(intent, 2);
             }
