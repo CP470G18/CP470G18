@@ -20,12 +20,7 @@
         <activity android:name=".ItemDetails"></activity>
         <activity android:name=".ListActivity"></activity>
         <activity android:name=".ListsActivity"/>
-<<<<<<< HEAD
         <activity android:name=".CreateItemActivity" />
-=======
-
-        <activity android:name=".CreateItemActvity" />
->>>>>>> main
     </application>
 
 </manifest>
