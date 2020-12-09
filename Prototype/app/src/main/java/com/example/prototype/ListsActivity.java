@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,10 +29,13 @@ import java.util.ArrayList;
 public class ListsActivity extends AppCompatActivity {
 
     private ListView lists;
+    private ListView price_lists;
 
     private ArrayList<String> list_names;
+    private ArrayList<String> list_prices;
     private ArrayList<String> list_keys;
     private ChatAdapter adapter;
+    private ArrayAdapter<String> adp;
 
     private FirebaseDatabaseHelper dbHelper;
 
@@ -41,18 +45,23 @@ public class ListsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lists);
 
         lists = (ListView) findViewById(R.id.lists);
+        price_lists = (ListView) findViewById(R.id.listPrices);
         list_names = new ArrayList<>();
         list_keys = new ArrayList<>();
+        list_prices = new ArrayList<>();
 
         adapter = new ChatAdapter(this);
+        adp=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list_prices);
         lists.setAdapter(adapter);
+        price_lists.setAdapter(adp);
+
 
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListsActivity.this, ListActivity.class);
                 intent.putExtra("ListKey", list_names.get(position));
-                intent.putExtra("Key",list_keys.get(position));
+                //intent.putExtra("Key",list_keys.get(position));
                 startActivity(intent);
             }
         });
@@ -86,6 +95,7 @@ public class ListsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar_lists);
 
         dbHelper = new FirebaseDatabaseHelper();
+
         populate();
     }
 
@@ -143,6 +153,52 @@ public class ListsActivity extends AppCompatActivity {
                 for (int i = 0; i<lists.size(); i++) {
                     list_names.add(lists.get(i).getName());
                     list_keys.add(keys.get(i));
+                    final String the_list=list_names.get(i);
+                    //Log.i("Alert",the_list);
+                    if(the_list != null){
+
+
+                    dbHelper.setList(the_list);
+                    dbHelper.readItems(new FirebaseDatabaseHelper.ItemDataStatus() {
+
+
+                        @Override
+                        public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
+
+                            Log.i("Warning","Populating table");
+                            list_keys.clear();
+                            int costPer=0;
+                            for (int t = 0; t<items.size(); t++) {
+                                Log.i("Testing",items.get(t).getName());
+                                costPer+=items.get(t).getCost();
+                            Log.i(the_list, String.valueOf(costPer));
+//                        list_keys.add(keys.get(i));
+                                adapter.notifyDataSetChanged();
+
+
+                            }
+                            list_prices.add("Price: "+String.valueOf(costPer));
+                            adp.notifyDataSetChanged();
+                            //list_names.set(list_names.indexOf(the_list),list_names.get(list_names.indexOf(the_list))+"     Price:"+String.valueOf(costPer));
+
+                        }
+
+                        @Override
+                        public void DataIsInserted() {
+
+                        }
+
+                        @Override
+                        public void DataIsUpdated() {
+
+                        }
+
+                        @Override
+                        public void DataIsDeleted() {
+
+                        }
+                    });
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -196,6 +252,42 @@ public class ListsActivity extends AppCompatActivity {
 
             TextView title = (TextView) view.findViewById(R.id.list_title);
             title.setText(getItem(position));
+
+            return view;
+        }
+    }
+    private class PriceAdapter extends ArrayAdapter<String>{
+
+        public PriceAdapter(Context ctx) {
+            super(ctx, 0);
+        }
+
+        /**
+         * Gets the size of list_names.
+         *
+         * @return Size of list_names.
+         */
+        public int getCount() {
+            return list_prices.size();
+        }
+
+        /**
+         * Gets an item from the array by index.
+         *
+         * @param position Index of array to get item from.
+         * @return Item.
+         */
+        public String getItem(int position) {
+            return list_prices.get(position);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater inflater = ListsActivity.this.getLayoutInflater();
+
+            View view = inflater.inflate(R.layout.layout_lists, null);
+
+//            TextView title = (TextView) view.findViewById(R.id.list_title);
+//            title.setText(getItem(position));
 
             return view;
         }
