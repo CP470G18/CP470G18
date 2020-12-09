@@ -136,6 +136,7 @@ public class ListsActivity extends AppCompatActivity {
         dbHelper.readLists(new FirebaseDatabaseHelper.listDataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<List> lists, ArrayList<String> keys) {
+                findViewById(R.id.progressBar).setVisibility(View.GONE);
                 list_names.clear();
                 list_keys.clear();
                 for (int i = 0; i<lists.size(); i++) {
