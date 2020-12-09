@@ -16,6 +16,7 @@ public class ListFragment extends Fragment {
     Button delete_button;
     TextView the_message;
     TextView the_price;
+    Button editButton;
     TextView the_desc;
     String messageText;
     String priceText;
@@ -36,14 +37,13 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_fragment, parent, false);
-        //delete_button = (Button) v.findViewById(R.id.messageDelete);
+        editButton = (Button) v.findViewById(R.id.editButton);
         the_message = (TextView) v.findViewById(R.id.messageFrag);
         the_desc= (TextView) v.findViewById(R.id.descFrag);
         the_price= (TextView) v.findViewById(R.id.priceFrag);
         nt= (TextView) v.findViewById(R.id.textView2);
         pt= (TextView) v.findViewById(R.id.textView3);
         dt= (TextView) v.findViewById(R.id.textView5);
-        //delete_button.setText(R.string.delText);
 
         nt.setText(R.string.nameText);
         pt.setText(R.string.priceText);
@@ -55,23 +55,13 @@ public class ListFragment extends Fragment {
 //        idText.setText((String.valueOf(the_id)));
 //        delete_button.setText(R.string.deleteButton);
         dbHelper = new FirebaseDatabaseHelper();
-        dbHelper.setList(listName);
 
-        //delete_button.setOnClickListener(new View.OnClickListener(){
-
-           // @Override
-            //public void onClick(View v) {
-                //dbHelper.deleteItem();
-                //getActivity().setResult(((int) textId)+1);
-                // if(the_type=="yes"){
-                //getActivity().finish();
-                //}
-
-
-
-
-            //}
-       // });
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ItemDetails) getActivity()).editItem();
+            }
+        });
         return v;
     }
 

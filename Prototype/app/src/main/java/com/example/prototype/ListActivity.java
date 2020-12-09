@@ -28,7 +28,6 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> temp_store;
     ArrayList<String> price_store;
     ArrayList<String> desc_store;
-    ArrayList<String> key_store;
     int costTotal;
     ListView the_list;
     TextView the_price_total;
@@ -47,7 +46,7 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_list);
         Intent intent=getIntent();
         costTotal=0;
-        listName=intent.getStringExtra("ListKey");
+        listName = intent.getStringExtra("Key");
         //Log.i("THis is it", listName);
         toolbar.setTitle(listName);
         setSupportActionBar(toolbar);
@@ -57,26 +56,10 @@ public class ListActivity extends AppCompatActivity {
         temp_store=new ArrayList<String>();
         desc_store=new ArrayList<String>();
         price_store=new ArrayList<String>();
-        key_store=new ArrayList<String>();
         adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,temp_store);
         the_list.setAdapter(adapter);
         dbHelper = new FirebaseDatabaseHelper();
-        dbHelper.setList(listName);
-        //populate();
-//        the_tool.setOnClickListener(new View.OnClickListener(){
-//
-//            //@Override
-//            //public void onClick(View v) {
-//                //Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
-//                //startActivityForResult(intent, 2);
-//            //}
-//        //});
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
-//                startActivityForResult(intent, 2);
-//            }
-//        });
+
         the_list.setClickable(true);
         the_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -87,10 +70,7 @@ public class ListActivity extends AppCompatActivity {
                 args.putString("Price",price_store.get(position));
                 args.putString("Desc",desc_store.get(position));
                 args.putString("ListName",listName);
-
-                //FOR OWEN
-                args.putString("Key",key_store.get(position));
-
+                args.putString("key", list_keys.get(position));
                 args.putString("phone","yes");
                 Intent intent = new Intent(ListActivity.this,ItemDetails.class);
                 intent.putExtra("bundle",args);
@@ -139,10 +119,10 @@ public class ListActivity extends AppCompatActivity {
             case R.id.create_list:
                 Log.d("Toolbar","creat_list selected");
                 Intent intent = new Intent(ListActivity.this,CreateItemActivity.class);
-                String listKey = getIntent().getExtras().getString("ListKey");
+                String listKey = getIntent().getExtras().getString("Key");
                 intent.putExtra("listName", listKey);
                 startActivityForResult(intent, 2);
-                //you can do your create list activity here
+                adapter.notifyDataSetChanged();
                 return true;
             case R.id.About:
                 LayoutInflater inflater = ListActivity.this.getLayoutInflater();
@@ -197,9 +177,10 @@ public class ListActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(ACTIVITY_NAME,"In onDestroy()");
     };
+
     private void populate() {
         costTotal=0;
-        dbHelper.readItems(new FirebaseDatabaseHelper.ItemDataStatus() {
+        dbHelper.readItems(listName, new FirebaseDatabaseHelper.ItemDataStatus() {
 
 
             @Override
@@ -215,8 +196,7 @@ public class ListActivity extends AppCompatActivity {
                         costTotal+=items.get(i).getCost();
                         the_price_total.setText(String.valueOf(costTotal));
                         desc_store.add(items.get(i).getDescription());
-                        key_store.add(items.get(i).getKey());
-//                        list_keys.add(keys.get(i));
+                        list_keys.add(keys.get(i));
                         adapter.notifyDataSetChanged();
 
 

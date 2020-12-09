@@ -52,23 +52,18 @@ public class ItemDetails extends AppCompatActivity {
         ft.replace(R.id.listfragmentlayout, mf);
 
         ft.commit();
+    }
 
+    public void editItem() {
+        Intent intent = new Intent(ItemDetails.this,UpdateDeleteItemActivity.class);
+        intent.putExtra("list_key",listName);
+        intent.putExtra("description",descText);
+        intent.putExtra("price",priceText);
+        intent.putExtra("key",key);
+        intent.putExtra("name", messageText);
 
-        edit = (Button) findViewById(R.id.button3);
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ItemDetails.this,UpdateDeleteItemActivity.class);
-                intent.putExtra("list_key",listName);
-                intent.putExtra("description",descText);
-                intent.putExtra("price",priceText);
-                intent.putExtra("key",key);
-                intent.putExtra("name", messageText);
-
-                startActivityForResult(intent, 2);
-            }
-        });
-
+        startActivityForResult(intent, 2);
+        finish();
     }
 
     public void setElements(Bundle args){
@@ -77,7 +72,7 @@ public class ItemDetails extends AppCompatActivity {
         priceText=args.getString("Price");
         descText=args.getString("Desc");
         listName=args.getString("ListName");
-        key = args.getString("Key");
+        key = args.getString("key");
         the_args=args;
     }
 }
