@@ -9,17 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UpdateDeleteItemActivity" />
         <activity android:name=".MenuActivity">
-          <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".CreateListActivity" />
-        <activity android:name=".ItemDetails"></activity>
-        <activity android:name=".ListActivity"></activity>
-        <activity android:name=".ListsActivity"/>
+        <activity android:name=".ItemDetails" />
+        <activity android:name=".ListActivity" />
+        <activity android:name=".ListsActivity" />
         <activity android:name=".CreateItemActivity" />
     </application>
 
