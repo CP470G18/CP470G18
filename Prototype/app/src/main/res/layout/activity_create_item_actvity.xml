@@ -5,13 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateItemActvity">
+    tools:context=".CreateItemActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="               New Item"
+        android:text="@string/new_item"
         android:textColor="#030EDA"
         android:textSize="32dp" />
 
@@ -19,7 +30,7 @@
         android:id="@+id/item_name"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:text="Name:"
+        android:text="@string/item_name"
         android:textColor="#010002" />
 
     <EditText
@@ -27,8 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Item Name" />
+        android:inputType="text" />
 
 
     <TextView
@@ -36,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="29dp"
         android:textColor="#010002"
-        android:text="Description:" />
+        android:text="@string/Description" />
 
     <EditText
         android:id="@+id/editTextTextDescription"
@@ -51,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="29dp"
         android:textColor="#010002"
-        android:text="Cost:" />
+        android:text="@string/Cost" />
 
     <EditText
         android:id="@+id/editTextTextCost"
@@ -65,13 +75,13 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:text="@string/Submit" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cancel" />
+        android:text="@string/Cancel" />
 
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.prototype;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,8 @@ public class ListFragment extends Fragment {
     String messageText;
     String priceText;
     String descText;
-
+    String listName;
+    private FirebaseDatabaseHelper dbHelper;
     TextView nt;
     TextView pt;
     TextView dt;
@@ -34,14 +36,14 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_fragment, parent, false);
-        delete_button = (Button) v.findViewById(R.id.messageDelete);
+        //delete_button = (Button) v.findViewById(R.id.messageDelete);
         the_message = (TextView) v.findViewById(R.id.messageFrag);
         the_desc= (TextView) v.findViewById(R.id.descFrag);
         the_price= (TextView) v.findViewById(R.id.priceFrag);
         nt= (TextView) v.findViewById(R.id.textView2);
         pt= (TextView) v.findViewById(R.id.textView3);
         dt= (TextView) v.findViewById(R.id.textView5);
-        delete_button.setText(R.string.delText);
+        //delete_button.setText(R.string.delText);
 
         nt.setText(R.string.nameText);
         pt.setText(R.string.priceText);
@@ -52,19 +54,24 @@ public class ListFragment extends Fragment {
         the_price.setText(priceText);
 //        idText.setText((String.valueOf(the_id)));
 //        delete_button.setText(R.string.deleteButton);
-        delete_button.setOnClickListener(new View.OnClickListener(){
+        dbHelper = new FirebaseDatabaseHelper();
+        dbHelper.setList(listName);
 
-            @Override
-            public void onClick(View v) {
+        //delete_button.setOnClickListener(new View.OnClickListener(){
 
-                getActivity().setResult((int) textId);
+           // @Override
+            //public void onClick(View v) {
+                //dbHelper.deleteItem();
+                //getActivity().setResult(((int) textId)+1);
                 // if(the_type=="yes"){
-                getActivity().finish();
+                //getActivity().finish();
                 //}
 
 
-            }
-        });
+
+
+            //}
+       // });
         return v;
     }
 
@@ -73,7 +80,7 @@ public class ListFragment extends Fragment {
         textId=args.getLong("the_id");
         priceText=args.getString("Price");
         descText=args.getString("Desc");
-
+        listName=args.getString("ListName");
         the_args=args;
     }
 
