@@ -2,8 +2,6 @@ package com.example.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,16 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class CreateGroupActivity extends AppCompatActivity {
+public class CreateListActivity extends AppCompatActivity {
 
     protected static final String ACTIVITY_NAME = "CreateGroupActivity";
     private EditText name;
     private EditText description;
     private Button submit;
     private Button Cancel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,38 +30,32 @@ public class CreateGroupActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("Title", name.getText().toString());
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-//                Group group = new Group();
-//                group.setName(name.getText().toString());
-//                group.setDescription(description.getText().toString());
-//
-//                new FirebaseDatabaseHelper().addGroup(group, new FirebaseDatabaseHelper.GroupDataStatus() {
-//                            @Override
-//                            public void DataIsLoaded(List<Group> Groups, List<String> keys) {
-//                                Toast.makeText(CreateGroupActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            @Override
-//                            public void DataIsInserted() {
-//
-//                            }
-//
-//                            @Override
-//                            public void DataIsUpdated() {
-//
-//                            }
-//
-//                            @Override
-//                            public void DataIsDeleted() {
-//
-//                            }
-//                });
-//
-//                        finish();
+                List list = new List();
+                list.setName(name.getText().toString());
+                list.setDescription(description.getText().toString());
 
+                new FirebaseDatabaseHelper().addList(list, new FirebaseDatabaseHelper.listDataStatus(){
+                    @Override
+                    public void DataIsLoaded(ArrayList<List> list, ArrayList<String> keys) {
+                        Toast.makeText(CreateListActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void DataIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+                finish();
             }
         });
 
