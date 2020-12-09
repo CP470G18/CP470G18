@@ -16,11 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".CreateListActivity" />
         <activity android:name=".ItemDetails"></activity>
         <activity android:name=".ListActivity"></activity>
         <activity android:name=".ListsActivity"/>
-        <activity android:name=".CreateGroupActivity" />
+        <activity android:name=".CreateListActivity" />
         <activity android:name=".ListActivity" />
         <activity android:name=".CreateItemActvity" />
     </application>

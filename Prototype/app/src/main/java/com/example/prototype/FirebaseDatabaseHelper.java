@@ -12,30 +12,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FirebaseDatabaseHelper {
     private FirebaseDatabase Database;
     private DatabaseReference ReferenceItem;
-    private DatabaseReference ReferenceGroup;
-    private List<Item> items = new ArrayList<>();
-    private List<Group> groups = new ArrayList<>();
+    private DatabaseReference ReferenceList;
+    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<List> lists = new ArrayList<>();
 
     public FirebaseDatabaseHelper() {
         Database = FirebaseDatabase.getInstance();
-        ReferenceItem = Database.getReference("items");// for item list
-        ReferenceGroup = Database.getReference("group");//list of item list
+        ReferenceList = Database.getReference("lists");//list of item list
     }
 
 
     public interface ItemDataStatus{
-        void DataIsLoaded(List<Item> items, List<String> keys);
+        void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys);
         void DataIsInserted();
         void DataIsUpdated();
         void DataIsDeleted();
     }
-    public interface GroupDataStatus{
-        void DataIsLoaded(List<Group> Groups, List<String> keys);
+    public interface listDataStatus{
+        void DataIsLoaded(ArrayList<List> lists, ArrayList<String> keys);
         void DataIsInserted();
         void DataIsUpdated();
         void DataIsDeleted();
@@ -46,7 +44,7 @@ public class FirebaseDatabaseHelper {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 items.clear();
-                List<String> keys = new ArrayList<>();
+                ArrayList<String> keys = new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Item item = keyNode.getValue(Item.class);
@@ -62,18 +60,18 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void readGroups(final GroupDataStatus dataStatus){
-        ReferenceGroup.addValueEventListener(new ValueEventListener() {
+    public void readLists(final listDataStatus dataStatus){
+        ReferenceList.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                groups.clear();
-                List<String> keys = new ArrayList<>();
+                lists.clear();
+                ArrayList<String> keys = new ArrayList<>();
                 for(DataSnapshot keyNode : snapshot.getChildren()){
                     keys.add(keyNode.getKey());
-                    Group group = keyNode.getValue(Group.class);
-                    groups.add(group);
+                    List list = keyNode.getValue(List.class);
+                    lists.add(list);
                 }
-                dataStatus.DataIsLoaded(groups, keys);
+                dataStatus.DataIsLoaded(lists, keys);
             }
 
             @Override
@@ -83,7 +81,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void addItem(Item item, final ItemDataStatus dataStatus){
+    public void addItem(Item item, String listKey, final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         String key = ReferenceItem.push().getKey();
         ReferenceItem.child(key).setValue(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -94,9 +93,9 @@ public class FirebaseDatabaseHelper {
                 });
     }
 
-    public void addGroup(Group group, final GroupDataStatus dataStatus){
-        String key = ReferenceGroup.push().getKey();
-        ReferenceGroup.child(key).setValue(group)
+    public void addList(List list, final listDataStatus dataStatus){
+        String key = ReferenceList.push().getKey();
+        ReferenceList.child(key).setValue(list)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

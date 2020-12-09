@@ -109,7 +109,9 @@ public class ListActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.create_list:
                 Log.d("Toolbar","creat_list selected");
-                Intent intent = new Intent(ListActivity.this,CreateItemActvity.class);
+                Intent intent = new Intent(ListActivity.this,CreateItemActivity.class);
+                String listKey = getIntent().getExtras().getString("ListKey");
+                intent.putExtra("listName", listKey);
                 startActivityForResult(intent, 2);
                 //you can do your create list activity here
                 return true;

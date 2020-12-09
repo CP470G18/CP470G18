@@ -1,15 +1,12 @@
 package com.example.prototype;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,22 +25,22 @@ import java.util.ArrayList;
 
 public class ListsActivity extends AppCompatActivity {
 
-    ListView lists;
+    private ListView lists;
 
-    ArrayList<String> list_names;
-    ChatAdapter adapter;
+    private ArrayList<String> list_names;
+    private ArrayList<String> list_keys;
+    private ChatAdapter adapter;
 
-    SharedPreferences sharedPref;
+    private FirebaseDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-
         lists = (ListView) findViewById(R.id.lists);
         list_names = new ArrayList<>();
+        list_keys = new ArrayList<>();
 
         adapter = new ChatAdapter(this);
         lists.setAdapter(adapter);
@@ -52,7 +49,7 @@ public class ListsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListsActivity.this, ListActivity.class);
-                intent.putExtra("List", list_names.get(position));
+                intent.putExtra("ListKey", list_keys.get(position));
                 startActivity(intent);
             }
         });
@@ -98,23 +95,14 @@ public class ListsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_list:
-                Intent intent = new Intent(this, CreateGroupActivity.class);
-                startActivityForResult(intent, 10);
+                Intent intent = new Intent(this, CreateListActivity.class);
+                intent.putExtra("Item", item.toString());
+                startActivity(intent);
                 //list_names.add("placeholder");
                 //adapter.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
-            String title = data.getStringExtra("Title");
-            list_names.add(title);
         }
     }
     

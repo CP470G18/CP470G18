@@ -2,7 +2,6 @@ package com.example.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-import android.widget.Toast;
+import java.util.ArrayList;
 
-import java.util.List;
-
-public class CreateItemActvity extends AppCompatActivity {
+public class CreateItemActivity extends AppCompatActivity {
 
     protected static final String ACTIVITY_NAME = "CreateItemActivity";
     private EditText name;
@@ -48,10 +44,11 @@ public class CreateItemActvity extends AppCompatActivity {
                 item.setCost(Integer.valueOf(cost.getText().toString()));
                 item.setDescription(description.getText().toString());
 
-                new FirebaseDatabaseHelper().addItem(item, new FirebaseDatabaseHelper.ItemDataStatus(){
+                String listName = getIntent().getExtras().getString("listName");
+                new FirebaseDatabaseHelper().addItem(item, listName, new FirebaseDatabaseHelper.ItemDataStatus(){
                     @Override
-                    public void DataIsLoaded(List<Item> items, List<String> keys) {
-                        Toast.makeText(CreateItemActvity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
+                    public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
+                        Toast.makeText(CreateItemActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
