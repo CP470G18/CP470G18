@@ -96,6 +96,13 @@ public class ListsActivity extends AppCompatActivity {
 
         dbHelper = new FirebaseDatabaseHelper();
 
+        //populate();
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
         populate();
     }
 
@@ -150,6 +157,7 @@ public class ListsActivity extends AppCompatActivity {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 list_names.clear();
                 list_keys.clear();
+                list_prices.clear();
                 for (int i = 0; i<lists.size(); i++) {
                     list_names.add(lists.get(i).getName());
                     list_keys.add(keys.get(i));
