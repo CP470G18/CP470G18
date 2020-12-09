@@ -103,4 +103,8 @@ public class FirebaseDatabaseHelper {
                     }
                 });
     }
+
+    public void deleteList(String key, final listDataStatus dataStatus) {
+        ReferenceList.child(key).removeValue();
+    }
 }
