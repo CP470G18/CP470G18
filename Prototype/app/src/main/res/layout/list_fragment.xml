@@ -70,4 +70,11 @@
         android:layout_marginTop="15dp"
         android:text="TextView"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/editButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="EDIT"/>
 </RelativeLayout>

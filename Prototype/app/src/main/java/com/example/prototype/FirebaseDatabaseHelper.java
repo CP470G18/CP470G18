@@ -18,7 +18,6 @@ public class FirebaseDatabaseHelper {
     private FirebaseDatabase Database;
     private DatabaseReference ReferenceItem;
     private DatabaseReference ReferenceList;
-    private String listName;
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<List> lists = new ArrayList<>();
 
@@ -27,10 +26,6 @@ public class FirebaseDatabaseHelper {
         ReferenceList = Database.getReference("lists");//list of item list
 
     }
-    public void setList(String listName){
-        ReferenceItem= Database.getReference("lists").child(listName).child("items");
-    }
-
 
     public interface ItemDataStatus{
         void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys);
@@ -45,7 +40,8 @@ public class FirebaseDatabaseHelper {
         void DataIsDeleted();
     }
 
-    public void readItems(final ItemDataStatus dataStatus){
+    public void readItems(String listKey, final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         ReferenceItem.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,7 +83,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void updateItem(String key, Item item ,final ItemDataStatus dataStatus){
+    public void updateItem(String listKey, String key, Item item ,final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         ReferenceItem.child(key).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -96,7 +93,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void deleteItem(String key, final ItemDataStatus dataStatus){
+    public void deleteItem(String listKey, String key, final ItemDataStatus dataStatus){
+        ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         ReferenceItem.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -109,7 +107,6 @@ public class FirebaseDatabaseHelper {
     public void addItem(Item item, String listKey, final ItemDataStatus dataStatus){
         ReferenceItem = Database.getReference("lists").child(listKey).child("items");
         String key = ReferenceItem.push().getKey();
-        item.setKey(key);
         ReferenceItem.child(key).setValue(item)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

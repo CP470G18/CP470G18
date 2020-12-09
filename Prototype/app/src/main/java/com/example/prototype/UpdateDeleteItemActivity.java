@@ -22,6 +22,12 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
     private Spinner item_spinner;
     private String key;
 
+    private String listkey;
+    private String sdescreption;
+    private String sprice;
+    private String  messageText;
+
+
 
 
     @Override
@@ -29,12 +35,23 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_delete_item);
 
+
+        listkey = getIntent().getStringExtra("list_key");
+        sdescreption = getIntent().getStringExtra("description");
+        sprice = getIntent().getStringExtra("price");
+        key = getIntent().getStringExtra("key");
+        messageText = getIntent().getStringExtra("name");
+
         name = (EditText) findViewById(R.id.editTextTextPersonName);
         description = (EditText) findViewById(R.id.editTextTextDescription);
         cost= (EditText) findViewById(R.id.editTextTextCost);
         Update = (Button) findViewById(R.id.button);
-        Delete = (Button) findViewById(R.id.button);
-        Cancel = (Button) findViewById(R.id.button);
+        Delete = (Button) findViewById(R.id.button1);
+        Cancel = (Button) findViewById(R.id.button2);
+
+        name.setText(messageText);
+        description.setText(sdescreption);
+        cost.setText(sprice);
 
         Update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +61,7 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
                 item.setDescription(description.getText().toString());
                 item.setCost(Integer.valueOf(cost.getText().toString()));
 
-                new FirebaseDatabaseHelper().updateItem(key, item, new FirebaseDatabaseHelper.ItemDataStatus() {
+                new FirebaseDatabaseHelper().updateItem(listkey ,key, item, new FirebaseDatabaseHelper.ItemDataStatus() {
                     @Override
                     public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
 
@@ -74,7 +91,7 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FirebaseDatabaseHelper().deleteItem(key, new FirebaseDatabaseHelper.ItemDataStatus() {
+                new FirebaseDatabaseHelper().deleteItem(listkey, key, new FirebaseDatabaseHelper.ItemDataStatus() {
                     @Override
                     public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
 
