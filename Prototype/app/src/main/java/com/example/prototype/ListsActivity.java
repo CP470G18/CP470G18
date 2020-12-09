@@ -81,6 +81,9 @@ public class ListsActivity extends AppCompatActivity {
         Toolbar toolbar_lists = (Toolbar) findViewById(R.id.toolbar_lists);
         toolbar_lists.setTitle("Lists");
         setSupportActionBar(toolbar_lists);
+
+        dbHelper = new FirebaseDatabaseHelper();
+        populate();
     }
 
     @Override
@@ -104,6 +107,36 @@ public class ListsActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void populate() {
+        dbHelper.readLists(new FirebaseDatabaseHelper.listDataStatus() {
+            @Override
+            public void DataIsLoaded(ArrayList<List> lists, ArrayList<String> keys) {
+                list_names.clear();
+                list_keys.clear();
+                for (int i = 0; i<lists.size(); i++) {
+                    list_names.add(lists.get(i).getName());
+                    list_keys.add(keys.get(i));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void DataIsInserted() {
+
+            }
+
+            @Override
+            public void DataIsUpdated() {
+
+            }
+
+            @Override
+            public void DataIsDeleted() {
+
+            }
+        });
     }
     
     private class ChatAdapter extends ArrayAdapter<String>{
