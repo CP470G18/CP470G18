@@ -51,7 +51,8 @@ public class ListsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListsActivity.this, ListActivity.class);
-                intent.putExtra("ListKey", list_keys.get(position));
+                intent.putExtra("ListKey", list_names.get(position));
+                intent.putExtra("Key",list_keys.get(position));
                 startActivity(intent);
             }
         });

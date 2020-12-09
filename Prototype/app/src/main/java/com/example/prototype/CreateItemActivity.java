@@ -71,7 +71,7 @@ public class CreateItemActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsInserted() {
-
+                        Log.i("Data Inserted","data");
                     }
 
                     @Override
