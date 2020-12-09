@@ -28,7 +28,9 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> temp_store;
     ArrayList<String> price_store;
     ArrayList<String> desc_store;
+    int costTotal;
     ListView the_list;
+    TextView the_price_total;
     private ArrayList<String> list_keys;
     ArrayAdapter<String> adapter;
     androidx.appcompat.widget.Toolbar the_tool;
@@ -39,10 +41,11 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         the_list= (ListView) findViewById(R.id.list);
+        the_price_total= (TextView) findViewById(R.id.priceView);
         //the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
         Toolbar toolbar = findViewById(R.id.toolbar_list);
         Intent intent=getIntent();
-
+        costTotal=0;
         listName=intent.getStringExtra("ListKey");
         //Log.i("THis is it", listName);
         toolbar.setTitle(listName);
@@ -57,7 +60,7 @@ public class ListActivity extends AppCompatActivity {
         the_list.setAdapter(adapter);
         dbHelper = new FirebaseDatabaseHelper();
         dbHelper.setList(listName);
-        populate();
+        //populate();
 //        the_tool.setOnClickListener(new View.OnClickListener(){
 //
 //            //@Override
@@ -117,6 +120,7 @@ public class ListActivity extends AppCompatActivity {
             Log.i("HELPME",price);
 
             price_store.add(price);
+            //costTotal+=Integer.parseInt(price);
             desc_store.add(desc);
             Log.i("The test",message);
             temp_store.add(message);
@@ -199,7 +203,7 @@ public class ListActivity extends AppCompatActivity {
         Log.i(ACTIVITY_NAME,"In onDestroy()");
     };
     private void populate() {
-
+        costTotal=0;
         dbHelper.readItems(new FirebaseDatabaseHelper.ItemDataStatus() {
 
 
@@ -209,10 +213,12 @@ public class ListActivity extends AppCompatActivity {
                 Log.i("Warning","Populating table");
                 list_keys.clear();
                 for (int i = 0; i<items.size(); i++) {
-                    Log.i("Testing",items.get(i).getName());
+                    Log.i("Testing",String.valueOf(costTotal));
 
                         temp_store.add(items.get(i).getName());
                         price_store.add(String.valueOf(items.get(i).getCost()));
+                        costTotal+=items.get(i).getCost();
+                        the_price_total.setText(String.valueOf(costTotal));
                         desc_store.add(items.get(i).getDescription());
 //                        list_keys.add(keys.get(i));
                         adapter.notifyDataSetChanged();
