@@ -8,7 +8,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, Integer cost, String description, String key) {
+    public Item(String name, Integer cost, String description) {
         this.name = name;
         this.cost = cost;
         this.description = description;
