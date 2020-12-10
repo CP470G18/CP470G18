@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class ListFragment extends Fragment {
-    Button delete_button;
     TextView the_message;
     TextView the_price;
     Button editButton;
@@ -37,7 +36,6 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.list_fragment, parent, false);
-        editButton = (Button) v.findViewById(R.id.editButton);
         the_message = (TextView) v.findViewById(R.id.messageFrag);
         the_desc= (TextView) v.findViewById(R.id.descFrag);
         the_price= (TextView) v.findViewById(R.id.priceFrag);
@@ -56,12 +54,6 @@ public class ListFragment extends Fragment {
 //        delete_button.setText(R.string.deleteButton);
         dbHelper = new FirebaseDatabaseHelper();
 
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ItemDetails) getActivity()).editItem();
-            }
-        });
         return v;
     }
 

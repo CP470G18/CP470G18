@@ -10,6 +10,23 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/filter"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_baseline_filter_list_24"
+        android:title="Filter"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/ascending"
+                android:title="@string/ascending" />
+            <item
+                android:id="@+id/descending"
+                android:title="@string/descending" />
+        </menu>
+
+    </item>
+
+    <item
         android:id = "@+id/About"
         android:orderInCategory="101"
         android:title = "Help"

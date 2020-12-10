@@ -36,7 +36,7 @@ public class CreateItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_item_actvity);
 
         Toolbar toolbar_item = (Toolbar) findViewById(R.id.toolbar_item);
-        toolbar_item.setTitle("Create_Item");
+        toolbar_item.setTitle(R.string.new_item);
         setSupportActionBar(toolbar_item);
 
         final EditText text = findViewById(R.id.editTextTextPersonName);
@@ -62,8 +62,8 @@ public class CreateItemActivity extends AppCompatActivity {
                 item.setCost(Integer.valueOf(cost.getText().toString()));
                 item.setDescription(description.getText().toString());
 
-                String listName = getIntent().getExtras().getString("listName");
-                new FirebaseDatabaseHelper().addItem(item, listName, new FirebaseDatabaseHelper.ItemDataStatus(){
+                String listKey = getIntent().getExtras().getString("listKey");
+                new FirebaseDatabaseHelper().addItem(item, listKey, new FirebaseDatabaseHelper.ItemDataStatus(){
                     @Override
                     public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
                         Toast.makeText(CreateItemActivity.this, "Item Successfully saved", Toast.LENGTH_LONG).show();

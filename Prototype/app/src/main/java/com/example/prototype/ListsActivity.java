@@ -34,8 +34,7 @@ public class ListsActivity extends AppCompatActivity {
     private ArrayList<String> list_names;
     private ArrayList<String> list_prices;
     private ArrayList<String> list_keys;
-    private ChatAdapter adapter;
-    private ArrayAdapter<String> adp;
+    private ArrayAdapter<String> adapter;
 
     private FirebaseDatabaseHelper dbHelper;
 
@@ -45,16 +44,11 @@ public class ListsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lists);
 
         lists = (ListView) findViewById(R.id.lists);
-        price_lists = (ListView) findViewById(R.id.listPrices);
         list_names = new ArrayList<>();
         list_keys = new ArrayList<>();
-        list_prices = new ArrayList<>();
 
-        adapter = new ChatAdapter(this);
-        adp=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list_prices);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_names);
         lists.setAdapter(adapter);
-        price_lists.setAdapter(adp);
-
 
         dbHelper = new FirebaseDatabaseHelper();
         lists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,6 +56,7 @@ public class ListsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(ListsActivity.this, ListActivity.class);
                 intent.putExtra("Key",list_keys.get(position));
+                intent.putExtra("Name", list_names.get(position));
                 startActivity(intent);
             }
         });
@@ -181,7 +176,6 @@ public class ListsActivity extends AppCompatActivity {
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
                 list_names.clear();
                 list_keys.clear();
-                list_prices.clear();
                 for (int i = 0; i<lists.size(); i++) {
                     list_names.add(lists.get(i).getName());
                     list_keys.add(keys.get(i));
@@ -206,42 +200,4 @@ public class ListsActivity extends AppCompatActivity {
             }
         });
     }
-    
-    private class ChatAdapter extends ArrayAdapter<String>{
-
-        public ChatAdapter(Context ctx) {
-            super(ctx, 0);
-        }
-
-        /**
-         * Gets the size of list_names.
-         *
-         * @return Size of list_names.
-         */
-        public int getCount() {
-            return list_names.size();
-        }
-
-        /**
-         * Gets an item from the array by index.
-         *
-         * @param position Index of array to get item from.
-         * @return Item.
-         */
-        public String getItem(int position) {
-            return list_names.get(position);
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = ListsActivity.this.getLayoutInflater();
-
-            View view = inflater.inflate(R.layout.layout_lists, null);
-
-            TextView title = (TextView) view.findViewById(R.id.list_title);
-            title.setText(getItem(position));
-
-            return view;
-        }
-    }
-
 }

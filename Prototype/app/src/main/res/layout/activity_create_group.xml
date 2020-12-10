@@ -18,19 +18,10 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/new_group"
-        android:textColor="#030EDA"
-        android:textSize="32sp" />
-
-    <TextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:text="@string/group_name"
-        android:textColor="#010002" />
+        android:text="@string/group_name"/>
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -39,21 +30,6 @@
         android:ems="10"
         android:inputType="text"
          />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="29dp"
-        android:textColor="#010002"
-        android:text="@string/Description" />
-
-    <EditText
-        android:id="@+id/editTextTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        />
 
     <Button
         android:id="@+id/button1"
