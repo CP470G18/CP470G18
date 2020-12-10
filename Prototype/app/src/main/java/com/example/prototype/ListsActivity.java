@@ -25,14 +25,13 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.BuildConfig;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListsActivity extends AppCompatActivity {
 
     private ListView lists;
-    private ListView price_lists;
 
     private ArrayList<String> list_names;
-    private ArrayList<String> list_prices;
     private ArrayList<String> list_keys;
     private ArrayAdapter<String> adapter;
 
@@ -115,8 +114,6 @@ public class ListsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar_lists);
 
         dbHelper = new FirebaseDatabaseHelper();
-
-        //populate();
     }
 
     @Override
@@ -164,6 +161,14 @@ public class ListsActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 return true;
+            case R.id.ascending:
+                sortA();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.descending:
+                sortB();
+                adapter.notifyDataSetChanged();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -199,5 +204,26 @@ public class ListsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void sortA() {
+        for (int i = 1; i < list_names.size(); i++) {
+            String currentName = list_names.get(i);
+            String currentKey = list_keys.get(i);
+            int j = i - 1;
+            while (j >= 0 && currentName.compareToIgnoreCase(list_names.get(j)) < 0) {
+                list_names.set(j+1, list_names.get(j));
+                list_keys.set(j+1, list_keys.get(j));
+                j--;
+            }
+            list_names.set(j+1, currentName);
+            list_keys.set(j+1, currentKey);
+        }
+    }
+
+    private void sortB() {
+        sortA();
+        Collections.reverse(list_names);
+        Collections.reverse(list_keys);
     }
 }
