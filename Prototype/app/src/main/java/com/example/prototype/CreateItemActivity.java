@@ -58,9 +58,15 @@ public class CreateItemActivity extends AppCompatActivity {
                 cost = findViewById(R.id.editTextTextCost);
                 description = findViewById(R.id.editTextTextDescription);
 
-                item.setName(name.getText().toString());
-                item.setCost(Integer.valueOf(cost.getText().toString()));
-                item.setDescription(description.getText().toString());
+                try {
+                    item.setName(name.getText().toString());
+                    item.setCost(Integer.valueOf(cost.getText().toString()));
+                    item.setDescription(description.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(CreateItemActivity.this, "Please input valid data", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
                 String listKey = getIntent().getExtras().getString("listKey");
                 new FirebaseDatabaseHelper().addItem(item, listKey, new FirebaseDatabaseHelper.ItemDataStatus(){

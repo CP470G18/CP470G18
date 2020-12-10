@@ -1,6 +1,7 @@
 package com.example.prototype;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,9 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_delete_item);
 
+        Toolbar toolbar_update = (Toolbar) findViewById(R.id.toolbar_update);
+        toolbar_update.setTitle(R.string.Edit);
+        setSupportActionBar(toolbar_update);
 
         listkey = getIntent().getStringExtra("list_key");
         sdescreption = getIntent().getStringExtra("description");
@@ -57,9 +61,16 @@ public class UpdateDeleteItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Item item = new Item();
-                item.setName(name.getText().toString());
-                item.setDescription(description.getText().toString());
-                item.setCost(Integer.valueOf(cost.getText().toString()));
+
+                try {
+                    item.setName(name.getText().toString());
+                    item.setDescription(description.getText().toString());
+                    item.setCost(Integer.valueOf(cost.getText().toString()));
+                } catch (Exception e) {
+                    Toast.makeText(UpdateDeleteItemActivity.this, "Please input valid data", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
                 new FirebaseDatabaseHelper().updateItem(listkey ,key, item, new FirebaseDatabaseHelper.ItemDataStatus() {
                     @Override
