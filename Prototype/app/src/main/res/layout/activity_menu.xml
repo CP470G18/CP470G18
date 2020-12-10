@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4CAF50"
     tools:context=".MenuActivity">
-
 
     <TextView
         android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_above="@id/image"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/List_app"
-        android:textSize="40dp"
-        android:textColor="#815AD8"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.074" />
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_launcher"/>
 
 
 // This is simply for open the listActivity.
     <Button
         android:id="@+id/start_button"
-        android:layout_width="155dp"
-        android:layout_height="64dp"
-        android:text="@string/manage_list"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.235" />
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_above="@id/help_button"
+        android:text="@string/manage_list"/>
 
 
 //This button is for help menu item in requirement that display a dialog with the author's name,
     Activity version number, and instruction for how to use the interface.
     <Button
         android:id="@+id/help_button"
-        android:layout_width="155dp"
-        android:layout_height="64dp"
-        android:text="@string/Get_Help"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404" />
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/Get_Help"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

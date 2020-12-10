@@ -24,7 +24,6 @@ public class CreateListActivity extends AppCompatActivity {
 
     protected static final String ACTIVITY_NAME = "CreateGroupActivity";
     private EditText name;
-    private EditText description;
     private Button submit;
     private Button Cancel;
 
@@ -35,18 +34,16 @@ public class CreateListActivity extends AppCompatActivity {
 
 
         Toolbar toolbar_group = (Toolbar) findViewById(R.id.toolbar_group);
-        toolbar_group.setTitle("Create_Group");
+        toolbar_group.setTitle(R.string.new_group);
         setSupportActionBar(toolbar_group);
 
         name = findViewById(R.id.editTextTextPersonName);
-        description = findViewById(R.id.editTextTextDescription);
         submit = (Button) findViewById(R.id.button1);
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 List list = new List();
                 list.setName(name.getText().toString());
-                list.setDescription(description.getText().toString());
 
                 new FirebaseDatabaseHelper().addList(list, new FirebaseDatabaseHelper.listDataStatus(){
                     @Override

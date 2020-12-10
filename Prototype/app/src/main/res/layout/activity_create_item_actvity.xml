@@ -19,19 +19,10 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/new_item"
-        android:textColor="#030EDA"
-        android:textSize="32dp" />
-
-    <TextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:text="@string/item_name"
-        android:textColor="#010002" />
+        android:text="@string/item_name"/>
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -45,7 +36,6 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:textColor="#010002"
         android:text="@string/Description" />
 
     <EditText
@@ -60,7 +50,6 @@
         android:id="@+id/cost"
         android:layout_width="match_parent"
         android:layout_height="29dp"
-        android:textColor="#010002"
         android:text="@string/Cost" />
 
     <EditText

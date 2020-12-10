@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.google.firebase.BuildConfig;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ListActivity extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "ListActivity";
@@ -34,6 +35,7 @@ public class ListActivity extends AppCompatActivity {
     private ArrayList<String> list_keys;
     ArrayAdapter<String> adapter;
     androidx.appcompat.widget.Toolbar the_tool;
+    String listKey;
     String listName;
     private FirebaseDatabaseHelper dbHelper;
     @Override
@@ -46,8 +48,9 @@ public class ListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_list);
         Intent intent=getIntent();
         costTotal=0;
-        listName = intent.getStringExtra("Key");
-        //Log.i("THis is it", listName);
+        listKey = intent.getStringExtra("Key");
+        listName = intent.getStringExtra("Name");
+        //Log.i("THis is it", listKey);
         toolbar.setTitle(listName);
         setSupportActionBar(toolbar);
         the_tool=(androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar_list);
@@ -69,13 +72,13 @@ public class ListActivity extends AppCompatActivity {
                 args.putLong("the_id",position);
                 args.putString("Price",price_store.get(position));
                 args.putString("Desc",desc_store.get(position));
-                args.putString("ListName",listName);
+                args.putString("listKey",listKey);
                 args.putString("key", list_keys.get(position));
                 args.putString("phone","yes");
                 Intent intent = new Intent(ListActivity.this,ItemDetails.class);
                 intent.putExtra("bundle",args);
                 startActivityForResult(intent,2);
-
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -119,8 +122,7 @@ public class ListActivity extends AppCompatActivity {
             case R.id.create_list:
                 Log.d("Toolbar","creat_list selected");
                 Intent intent = new Intent(ListActivity.this,CreateItemActivity.class);
-                String listKey = getIntent().getExtras().getString("Key");
-                intent.putExtra("listName", listKey);
+                intent.putExtra("listKey", listKey);
                 startActivityForResult(intent, 2);
                 adapter.notifyDataSetChanged();
                 return true;
@@ -145,6 +147,14 @@ public class ListActivity extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 return true;
+            case R.id.ascending:
+                sortA();
+                adapter.notifyDataSetChanged();
+                return true;
+            case R.id.descending:
+                sortB();
+                adapter.notifyDataSetChanged();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -153,6 +163,7 @@ public class ListActivity extends AppCompatActivity {
 
 
     protected void onResume(){
+        super.onResume();
         super.onResume();
         Log.i(ACTIVITY_NAME,"In onResume()");
         populate();
@@ -180,13 +191,15 @@ public class ListActivity extends AppCompatActivity {
 
     private void populate() {
         costTotal=0;
-        dbHelper.readItems(listName, new FirebaseDatabaseHelper.ItemDataStatus() {
+        dbHelper.readItems(listKey, new FirebaseDatabaseHelper.ItemDataStatus() {
 
 
             @Override
             public void DataIsLoaded(ArrayList<Item> items, ArrayList<String> keys) {
                 temp_store.clear();
                 Log.i("Warning","Populating table");
+                desc_store.clear();
+                price_store.clear();
                 list_keys.clear();
                 for (int i = 0; i<items.size(); i++) {
                     Log.i("Testing",String.valueOf(costTotal));
@@ -218,6 +231,35 @@ public class ListActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void sortA() {
+        for (int i = 1; i < price_store.size(); i++) {
+            String currentPrice = price_store.get(i);
+            String currentTemp = temp_store.get(i);
+            String currentDesc = desc_store.get(i);
+            String currentKey = list_keys.get(i);
+            int j = i - 1;
+            while (j >= 0 && Integer.parseInt(currentPrice) < Integer.parseInt(price_store.get(j))) {
+                price_store.set(j+1, price_store.get(j));
+                temp_store.set(j+1, temp_store.get(j));
+                desc_store.set(j+1, desc_store.get(j));
+                list_keys.set(j+1, list_keys.get(j));
+                j--;
+            }
+            price_store.set(j+1, currentPrice);
+            temp_store.set(j+1, currentTemp);
+            desc_store.set(j+1, currentDesc);
+            list_keys.set(j+1, currentKey);
+        }
+    }
+
+    private void sortB() {
+        sortA();
+        Collections.reverse(price_store);
+        Collections.reverse(temp_store);
+        Collections.reverse(desc_store);
+        Collections.reverse(list_keys);
     }
 
 }
